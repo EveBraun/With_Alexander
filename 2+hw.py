@@ -22,19 +22,35 @@ def get_image_url(url):
         return None
 
 
+if os.path.exists('dogs'):
+    pass
+else:
+    os.mkdir('dogs')
+
+
+
 def load_image(url, i, breed):
     try:
         response = requests.get(url)
         status = response.status_code
         if status == 200:
             image = response.content
-            with open(f'image{i}{breed}.jpg', 'wb') as file:
+
+            if os.path.exists(f'dogs/{breed}'):
+                pass
+            else:
+                os.mkdir(f'dogs/{breed}')
+
+            with open(f'dogs/{breed}/image{i}{breed}.jpg', 'wb') as file:
                 file.write(image)
         else:
             print('There is a problem')
     except Exception as err:
         print(err)
-        
+
+
+# with open(f'images/{photo_of_goods.get("alt")}.jpeg', 'ab') as file:       
+
 
 for i in tqdm(range(1, 3)):
     url_image = get_image_url(URL)
@@ -47,8 +63,8 @@ for i in tqdm(range(1, 3)):
         print('Error')
 
 
-breed = 'taksa'
-if os.path.exists(breed):
-    print('Ok')
-else:
-    os.mkdir(breed)
+# breed = 'taksa'
+# if os.path.exists(breed):
+#     print('Ok')
+# else:
+#     os.mkdir(breed)
