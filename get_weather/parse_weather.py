@@ -23,7 +23,7 @@ def get_weather(html: str):
     day_of_week = date[0]
     day_of_month = date[1]
  
-    table = soup.find('table', class_="weather-today short")
+    table = soup.find_all('div', class_="weather-short")[0]
     rows = table.find_all('tr')
     weather_today = {"day_of_week": day_of_week,
                      "day_of_month": day_of_month
@@ -65,3 +65,6 @@ print(weather_json)
  
 # with open('index.html', 'w') as file:
 #     file.write(get_html(URL))
+
+
+# работает нестабильно, тк иногда по ссылке сайт выдает не тут страничку
